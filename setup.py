@@ -1,10 +1,15 @@
 from setuptools import setup
 import re
+from os import path
 
 __version__ = re.findall(
     r"""__version__ = ["']+([0-9\.]*)["']+""",
     open("sphinx_mdolab_theme/__init__.py").read(),
 )[0]
+
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
 
 setup(
     name="sphinx_mdolab_theme",
@@ -12,6 +17,8 @@ setup(
     version=__version__,
     license="MIT",
     description="MDO Lab sphinx theme",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="MDO Lab",
     author_email="mdolabbuildbot@gmail.com",
     url="https://github.com/mdolab/sphinx_mdolab_theme",
