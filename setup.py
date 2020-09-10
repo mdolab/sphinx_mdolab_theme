@@ -1,9 +1,15 @@
 from setuptools import setup
+import re
+
+__version__ = re.findall(
+    r"""__version__ = ["']+([0-9\.]*)["']+""",
+    open("sphinx_mdolab_theme/__init__.py").read(),
+)[0]
 
 setup(
     name="sphinx_mdolab_theme",
     packages=["sphinx_mdolab_theme"],
-    version="0.1",
+    version=__version__,
     license="MIT",
     description="MDO Lab sphinx theme",
     author="MDO Lab",
