@@ -1,10 +1,16 @@
 os: linux
 language: python
+env:
+  - TEST_REPO=pyhyp
 python:
-    - "3.7"
+  - "3.7"
+
 install: pip install .
 
-script: skip
+script:
+  - git clone https://github.com/mdolab/$TEST_REPO.git
+  - cd $TEST_REPO/doc
+  - make html
 
 deploy:
   provider: pypi
