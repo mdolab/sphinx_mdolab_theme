@@ -7,11 +7,11 @@ python:
 
 install: pip install .
 
-script:
-  - git clone https://github.com/mdolab/$TEST_REPO.git
-  - cd $TEST_REPO/doc
-  - pip install -r requirements.txt
-  - make html
+script: skip
+  #- git clone https://github.com/mdolab/$TEST_REPO.git
+  #- cd $TEST_REPO/doc
+  #- pip install -r requirements.txt
+  #- make html
 
 deploy:
   provider: pypi
