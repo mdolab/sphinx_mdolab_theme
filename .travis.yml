@@ -14,9 +14,9 @@ script:
   - make html
 
 after_success:
-  - cd ../
-  - ls
+  - cd ../../
   - rm -rf $TEST_REPO
+  - ls
 
 deploy:
   provider: pypi
