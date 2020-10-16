@@ -14,9 +14,9 @@ script:
   - make html
 
 after_success:
+  # Delete the test repo
   - cd ../../
   - rm -rf $TEST_REPO
-  - ls
 
 deploy:
   provider: pypi
