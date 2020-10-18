@@ -24,6 +24,9 @@ extensions = [
 # tell autoclass to document the __init__ methods
 autoclass_content = "both"
 
+# if using numpydoc, this hides a bunch of warnings
+numpydoc_show_class_members = False 
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = "sphinx_mdolab_theme"
