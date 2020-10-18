@@ -21,6 +21,9 @@ extensions = [
     "sphinx.ext.autosummary",
 ]
 
+# tell autoclass to document the __init__ methods
+autoclass_content = "both"
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = "sphinx_mdolab_theme"
