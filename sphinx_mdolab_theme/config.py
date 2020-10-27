@@ -32,7 +32,7 @@ numpydoc_show_class_members = False
 html_theme = "sphinx_mdolab_theme"
 
 html_theme_options = {
-    "titles_only": True,
+#     "titles_only": True, # hide headings from the sidebar, only show separate pages
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
