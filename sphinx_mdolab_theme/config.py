@@ -19,6 +19,7 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
 ]
 
 # tell autoclass to document the __init__ methods
