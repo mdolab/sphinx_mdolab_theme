@@ -20,20 +20,21 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "sphinx_mdolab_theme.ext.optionstable",
 ]
 
 # tell autoclass to document the __init__ methods
 autoclass_content = "both"
 
 # if using numpydoc, this hides a bunch of warnings
-numpydoc_show_class_members = False 
+numpydoc_show_class_members = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 html_theme = "sphinx_mdolab_theme"
 
 html_theme_options = {
-#     "titles_only": True, # hide headings from the sidebar, only show separate pages
+    #     "titles_only": True, # hide headings from the sidebar, only show separate pages
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

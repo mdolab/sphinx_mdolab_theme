@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import re
 from os import path
 
@@ -13,7 +13,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="sphinx_mdolab_theme",
-    packages=["sphinx_mdolab_theme"],
+    packages=find_packages(),
     version=__version__,
     license="MIT",
     description="MDO Lab sphinx theme",
