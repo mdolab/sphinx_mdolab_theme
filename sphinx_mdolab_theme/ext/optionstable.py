@@ -20,44 +20,39 @@ class OptionsTable(Table):
     option_spec = {
         "optionvar": str,
         "filename": str,
-        "header": str,
         "widths": directives.positive_int_list,
+        "optionvar": str,
     }
+
+    # default options
+    filename = "options.yaml"
+    N_COLS = 4
+    header = ["Name", "Type", "Default value", "Description"]
+    col_widths = [15, 10, 15, 40]
+    optionvar = "defaultOptions"
 
     def get_options(self, cls):
         # extracts the dictionaries from the class instance
-        class_instance = cls(raiseError=False)
+        class_instance = cls("temp", raiseError=False)
         # since the name of the attribute can change, need to access via __dict__
         if "optionvar" in self.options:
-            optionvar = self.options["optionvar"]
-        else:
-            optionvar = "defaultOptions"
-        self.defaultOptions = class_instance.__dict__[optionvar]
+            self.optionvar = self.options["optionvar"]
+        # self.defaultOptions = class_instance.defaultOptions
+        self.defaultOptions = class_instance.__dict__[self.optionvar]
 
     def get_descriptions(self):
         if "filename" in self.options:
-            filename = self.options["filename"]
-        else:
-            filename = "options.yaml"
-        with open(filename) as f:
+            self.filename = self.options["filename"]
+
+        with open(self.filename) as f:
             self.desc = yaml.load(f, Loader=yaml.FullLoader)
-
-    def set_header(self):
-        # sets the self.header and self.max_cols
-        # based on options
-        if "header" in self.options:
-            self.header = self.options["header"].split(",")
-        else:
-            self.header = ["Option name", "Default value", "Description"]
-
-        self.max_cols = len(self.header)
 
     def set_width(self):
         # sets the self.col_widths
         if "widths" in self.options:
-            self.col_widths = self.options["widths"]
-        else:
-            self.col_widths = [20, 20, 40]
+            widths = self.options["widths"]
+            assert len(widths) == self.N_COLS
+            self.col_widths = widths
 
     def run(self):
         module_path, member_name = self.arguments[0].rsplit(".", 1)
@@ -66,8 +61,6 @@ class OptionsTable(Table):
         self.get_options(class_name)
         # read the descriptions
         self.get_descriptions()
-        # set header option
-        self.set_header()
         # set width
         self.set_width()
         table_node = self.build_table()
@@ -91,10 +84,26 @@ class OptionsTable(Table):
             trow = nodes.row()
             # first add the name column, with text = key
             trow += add_col("``" + key + "``")
+            # type
+            # __name__ extracts the name of the datatype (e.g. str, float etc.)
+            default_type = value[0]
+            trow += add_col(str(default_type.__name__))
             # default value
-            trow += add_col(str(value))
+            default_value = value[1]
+            if isinstance(default_value, list) and default_type != list:
+                default_value = value[1][0]
+                choices = True
+            else:
+                choices = False
+            trow += add_col(str(default_value))
             # description
-            trow += add_col(self.desc[key])
+            if choices:
+                desc = self.desc[key]["desc"] + "\n\n"
+                for choice in value[1]:
+                    desc += f"-  ``{choice}``: \t{self.desc[key][choice]}\n\n"
+            else:
+                desc = self.desc[key]
+            trow += add_col(desc)
             rows.append(trow)
         return rows, groups
 
