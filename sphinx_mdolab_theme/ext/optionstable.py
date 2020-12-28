@@ -15,13 +15,11 @@ class OptionsTable(Table):
     """
 
     required_arguments = 0
-    optional_arguments = 4
+    optional_arguments = 2
     has_content = True
     option_spec = {
-        "optionvar": str,
         "filename": str,
         "widths": directives.positive_int_list,
-        "optionvar": str,
     }
 
     # default options
@@ -29,16 +27,14 @@ class OptionsTable(Table):
     N_COLS = 4
     header = ["Name", "Type", "Default value", "Description"]
     col_widths = [15, 10, 15, 40]
-    optionvar = "defaultOptions"
 
-    def get_options(self, cls):
-        # extracts the dictionaries from the class instance
-        class_instance = cls("temp", raiseError=False)
-        # since the name of the attribute can change, need to access via __dict__
-        if "optionvar" in self.options:
-            self.optionvar = self.options["optionvar"]
-        # self.defaultOptions = class_instance.defaultOptions
-        self.defaultOptions = class_instance.__dict__[self.optionvar]
+    def get_options(self):
+        # access the class name
+        module_path, member_name = self.arguments[0].rsplit(".", 1)
+        # import the class
+        cls = getattr(import_module(module_path), member_name)
+        # call the private function to get the default options
+        self.defaultOptions = cls._getDefaultOptions()
 
     def get_descriptions(self):
         if "filename" in self.options:
@@ -55,14 +51,13 @@ class OptionsTable(Table):
             self.col_widths = widths
 
     def run(self):
-        module_path, member_name = self.arguments[0].rsplit(".", 1)
-        class_name = getattr(import_module(module_path), member_name)
         # set the self.defaultOptions attribute
-        self.get_options(class_name)
+        self.get_options()
         # read the descriptions
         self.get_descriptions()
         # set width
         self.set_width()
+        # build table
         table_node = self.build_table()
         return [table_node]
 
@@ -83,24 +78,32 @@ class OptionsTable(Table):
         for key, value in self.defaultOptions.items():
             trow = nodes.row()
             # first add the name column, with text = key
+            # this is the name of the option, wrapped in double backticks
             trow += add_col("``" + key + "``")
-            # type
+            # this is the type of the option
             # __name__ extracts the name of the datatype (e.g. str, float etc.)
+            # otherwise this will display <class 'str'> etc
             default_type = value[0]
             trow += add_col(str(default_type.__name__))
-            # default value
+            # this is the default value
+            # here we do some type checking if we get a list of possible choices
+            # TODO: could potentially import baseclasses and use existing code there
             default_value = value[1]
             if isinstance(default_value, list) and default_type != list:
                 default_value = value[1][0]
-                choices = True
+                choices = True  # we have a choice
             else:
                 choices = False
             trow += add_col(str(default_value))
-            # description
+            # this is the description from the yaml file
+            # for choices, we expect a field called desc containing general description
+            # plus one field for each possible choice
+            # TODO: can add better error message when yaml file does not match
             if choices:
                 desc = self.yaml[key]["desc"] + "\n\n"
                 for choice in value[1]:
                     desc += f"-  ``{choice}``: \t{self.yaml[key][choice]}\n\n"
+            # if there are no choices, we just pick out the entry from yaml
             else:
                 desc = self.yaml[key]
             trow += add_col(desc)
