@@ -45,7 +45,7 @@ class OptionsTable(Table):
             self.filename = self.options["filename"]
 
         with open(self.filename) as f:
-            self.desc = yaml.load(f, Loader=yaml.FullLoader)
+            self.yaml = yaml.load(f, Loader=yaml.FullLoader)
 
     def set_width(self):
         # sets the self.col_widths
@@ -98,11 +98,11 @@ class OptionsTable(Table):
             trow += add_col(str(default_value))
             # description
             if choices:
-                desc = self.desc[key]["desc"] + "\n\n"
+                desc = self.yaml[key]["desc"] + "\n\n"
                 for choice in value[1]:
-                    desc += f"-  ``{choice}``: \t{self.desc[key][choice]}\n\n"
+                    desc += f"-  ``{choice}``: \t{self.yaml[key][choice]}\n\n"
             else:
-                desc = self.desc[key]
+                desc = self.yaml[key]
             trow += add_col(desc)
             rows.append(trow)
         return rows, groups
