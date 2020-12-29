@@ -99,13 +99,11 @@ class OptionsTable(Table):
             # for choices, we expect a field called desc containing general description
             # plus one field for each possible choice
             # TODO: can add better error message when yaml file does not match
+            desc = self.yaml[key]["desc"]
             if choices:
-                desc = self.yaml[key]["desc"] + "\n\n"
                 for choice in value[1]:
-                    desc += f"-  ``{choice}``: \t{self.yaml[key][choice]}\n\n"
+                    desc += f"\n\n-  ``{choice}``: \t{self.yaml[key][choice]}"
             # if there are no choices, we just pick out the entry from yaml
-            else:
-                desc = self.yaml[key]
             trow += add_col(desc)
             rows.append(trow)
         return rows, groups
