@@ -32,3 +32,13 @@ For options with multiple choices, the format is
   <choice 1>: <description of choice 1>
   <choice 2>: <description of choice 2>
 ```
+
+If the description is long, it should be split into multiple lines.
+In that case, the YAML operator `>` can be used:
+```
+<option>:
+  desc: >
+  <this can now be multiple lines>
+```
+
+Text written in the `desc` field will be parsed appropriately, therefore any RST/Sphinx markup can be used, such as italics, bold, or bullet points.
