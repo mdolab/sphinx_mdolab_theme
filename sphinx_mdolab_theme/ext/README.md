@@ -13,10 +13,16 @@ sys.path.insert(0, os.path.abspath("../"))
 ```
 If the package has autodoc API documentation, then the above line is already there.
 
-There are two options for the extension
+There are two optional arguments for the extension
 - `filename` to specify the YAML file containing the description of the options. The default value is `options.yaml` under the current (i.e. `doc`) directory.
 - `widths`, a list of four numbers specifying the relative width of the table columns. The default value is `[15, 10, 15, 40]`.
 
+For this extension to work, two things must be in place in the code repo:
+- a static method called `_getDefaultOptions` in the class that returns the default options dictionary
+- a YAML file corresponding to the `filename` option above that contains the descriptions of the options
+
+The capitalization of the option names **must match** between the default options dictionary, and the keys of the YAML file.
+For readability, we recomment the options to be capitalized according to camelCase, since this will be the display name via this extension.
 
 # YAML File Format
 The YAML file containing the descriptions must be of the following format:
