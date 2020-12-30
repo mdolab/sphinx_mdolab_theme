@@ -30,9 +30,9 @@ class OptionsTable(Table):
 
     def get_options(self):
         # access the class name
-        module_path, member_name = self.arguments[0].rsplit(".", 1)
+        self.module_path, self.member_name = self.arguments[0].rsplit(".", 1)
         # import the class
-        cls = getattr(import_module(module_path), member_name)
+        cls = getattr(import_module(self.module_path), self.member_name)
         # call the private function to get the default options
         self.defaultOptions = cls._getDefaultOptions()
 
@@ -50,6 +50,16 @@ class OptionsTable(Table):
             assert len(widths) == self.N_COLS
             self.col_widths = widths
 
+    def make_title(self):
+        """
+        This is taken directly from the Sphinx Table directive
+        but simplified and modified so the title, i.e. caption is just the class name
+        """
+        title_text = f"{self.member_name} Default Options"  # this is the class name
+        text_nodes, messages = self.state.inline_text(title_text, self.lineno)
+        title = nodes.title(title_text, '', *text_nodes)
+        return title, messages
+
     def run(self):
         # set the self.defaultOptions attribute
         self.get_options()
@@ -57,9 +67,12 @@ class OptionsTable(Table):
         self.get_descriptions()
         # set width
         self.set_width()
+        # get caption
+        title, messages = self.make_title()
         # build table
         table_node = self.build_table()
-        return [table_node]
+        table_node.insert(0, title)
+        return [table_node] + messages
 
     def collect_rows(self):
         # Add a column for a field. In order to have the RST inside
