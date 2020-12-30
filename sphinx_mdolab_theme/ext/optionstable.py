@@ -83,18 +83,21 @@ class OptionsTable(Table):
             # this is the type of the option
             # __name__ extracts the name of the datatype (e.g. str, float etc.)
             # otherwise this will display <class 'str'> etc
-            default_type = value[0]
-            trow += add_col(str(default_type.__name__))
+            defaultType = value[0]
+            trow += add_col(str(defaultType.__name__))
             # this is the default value
             # here we do some type checking if we get a list of possible choices
             # TODO: could potentially import baseclasses and use existing code there
-            default_value = value[1]
-            if isinstance(default_value, list) and default_type != list:
-                default_value = value[1][0]
+            defaultValue = value[1]
+            if isinstance(defaultValue, list) and defaultType != list:
+                defaultValue = value[1][0]
                 choices = True  # we have a choice
             else:
                 choices = False
-            trow += add_col(str(default_value))
+            # wrap default value in verbatim if str
+            if defaultType == str:
+                defaultValue = f"``{defaultValue}``"
+            trow += add_col(str(defaultValue))
             # this is the description from the yaml file
             # for choices, we expect a field called desc containing general description
             # plus one field for each possible choice
