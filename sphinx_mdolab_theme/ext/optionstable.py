@@ -97,7 +97,11 @@ class OptionsTable(Table):
             # __name__ extracts the name of the datatype (e.g. str, float etc.)
             # otherwise this will display <class 'str'> etc
             defaultType = value[0]
-            trow += add_col(str(defaultType.__name__))
+            if isinstance(defaultType, tuple):
+                types = [str(t.__name__) for t in defaultType]
+                trow += add_col(' or '.join(types))
+            else:
+                trow += add_col(str(defaultType.__name__))
             # this is the default value
             # here we do some type checking if we get a list of possible choices
             # TODO: could potentially import baseclasses and use existing code there
