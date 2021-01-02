@@ -12,3 +12,7 @@
        overflow: visible !important;
     }
  }
+/* change max width to none */
+.wy-nav-content {
+   max-width: none;
+}
