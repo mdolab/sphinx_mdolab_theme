@@ -20,14 +20,18 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.napoleon",
     "sphinx_mdolab_theme.ext.optionstable",
 ]
 
 # tell autoclass to document the __init__ methods
 autoclass_content = "both"
 
-# if using numpydoc, this hides a bunch of warnings
-numpydoc_show_class_members = False
+# Enforce numpydoc style only
+napoleon_google_docstring = True
+# Document init functions
+napoleon_include_init_with_doc = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
