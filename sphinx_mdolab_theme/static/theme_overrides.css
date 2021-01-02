@@ -14,5 +14,5 @@
  }
 /* change max width to none */
 .wy-nav-content {
-   max-width: none;
+   max-width: 1200px !important;
 }
