@@ -26,7 +26,7 @@ class OptionsTable(Table):
     filename = "options.yaml"
     N_COLS = 4
     header = ["Name", "Type", "Default value", "Description"]
-    col_widths = [15, 10, 15, 40]
+    col_widths = [1, 1, 1, 97]
 
     def get_options(self):
         # access the class name
