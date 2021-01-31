@@ -1,5 +1,5 @@
 # -- Project information -----------------------------------------------------
-copyright = "2020, MDO Lab"
+copyright = "2021, MDO Lab"
 
 # -- General configuration -----------------------------------------------------
 
