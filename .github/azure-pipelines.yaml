@@ -44,7 +44,7 @@ stages:
       displayName: Install
     - script: |
         git clone https://github.com/mdolab/${{ variables.TEST_REPO }}.git
-        cd $${{ variables.TEST_REPO }}/doc
+        cd ${{ variables.TEST_REPO }}/doc
         pip install -r requirements.txt
       displayName: Set Up Test Repo
     - script: make html
@@ -56,7 +56,7 @@ stages:
   jobs:
   - template: azure/azure_style.yaml@azure_template
     parameters:
-      REPO_NAME: $${{ variables.REPO_NAME }}
+      REPO_NAME: ${{ variables.REPO_NAME }}
       IGNORE_STYLE: false
 
 - stage:
@@ -68,4 +68,4 @@ stages:
   jobs:
   - template: azure/azure_pypi.yaml@azure_template
     parameters:
-      REPO_NAME: $${{ variables.REPO_NAME }}
+      REPO_NAME: ${{ variables.REPO_NAME }}
