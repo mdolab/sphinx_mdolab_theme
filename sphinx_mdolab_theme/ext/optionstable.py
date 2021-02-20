@@ -57,7 +57,7 @@ class OptionsTable(Table):
         """
         title_text = f"{self.member_name} Default Options"  # this is the class name
         text_nodes, messages = self.state.inline_text(title_text, self.lineno)
-        title = nodes.title(title_text, '', *text_nodes)
+        title = nodes.title(title_text, "", *text_nodes)
         return title, messages
 
     def run(self):
@@ -99,7 +99,7 @@ class OptionsTable(Table):
             defaultType = value[0]
             if isinstance(defaultType, tuple):
                 types = [str(t.__name__) for t in defaultType]
-                trow += add_col(' or '.join(types))
+                trow += add_col(" or ".join(types))
             else:
                 trow += add_col(str(defaultType.__name__))
             # this is the default value
