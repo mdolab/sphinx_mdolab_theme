@@ -43,7 +43,7 @@ stages:
     - script: pip install .
       displayName: Install
     - script: |
-        git clone https://github.com/mdolab/$${{ variables.TEST_REPO }}.git
+        git clone https://github.com/mdolab/${{ variables.TEST_REPO }}.git
         cd $${{ variables.TEST_REPO }}/doc
         pip install -r requirements.txt
       displayName: Set Up Test Repo
