@@ -1,3 +1,5 @@
+import os
+
 # -- Project information -----------------------------------------------------
 copyright = "2021, MDO Lab"
 
@@ -41,6 +43,11 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+# This is the MDO Lab logo
+# A default version is provided by the package but this parameter can be overwritten to use
+# a custom logo for a specific documentation site
+html_logo = os.path.join(os.path.dirname(__file__), "static/MDO_Lab_logo_RTD.png")
 
 
 def setup(app):

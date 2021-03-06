@@ -32,6 +32,7 @@ setup(
         "sphinx_mdolab_theme": [
             "theme.conf",
             "static/*.css",
+            "static/*.png",
         ]
     },
     include_package_data=True,
