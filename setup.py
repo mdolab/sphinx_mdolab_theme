@@ -38,7 +38,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "sphinx>=3.0",
-        "sphinx_rtd_theme",
+        "sphinx_rtd_theme>=0.5",
         "pyyaml",
     ],
     classifiers=[
