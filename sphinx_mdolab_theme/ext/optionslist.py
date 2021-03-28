@@ -66,6 +66,8 @@ class OptionsList(Include):
                 else:
                     choices = False
                 txt.append(self.VALUE_PREFIX + str(defaultValue))
+                f.writelines("\n".join(txt))
+                f.write("\n")
                 # this is the description from the yaml file
                 # for choices, we expect a field called desc containing general description
                 # plus one field for each possible choice
@@ -73,18 +75,18 @@ class OptionsList(Include):
                 desc = self.yaml[key]["desc"]
                 # because this part needs to be indented in the RST file, we have to split it first
                 if "\n" in desc:
-                    desc = desc.splitlines()
+                    base_desc = desc.splitlines()
                 else:
-                    desc = [desc]
+                    base_desc = [desc]
+                # write the base description
+                f.write(f"\n{self.INDENT}")
+                f.writelines(f"\n{self.INDENT}".join(base_desc))
+                # now handle the choices
                 if choices:
+                    f.write("\n")
                     for choice in value[1]:
-                        desc.append(f"-  ``{choice}``: {self.yaml[key][choice]}")
-                # we now insert the indent for each line
-                desc = f"\n{self.INDENT}".join(desc)
-                # we add the initial newline + indent
-                desc = f"\n{self.INDENT}" + desc
-                txt.append(desc)
-                f.writelines("\n".join(txt))
+                        choice_desc = f"-  ``{choice}``: {self.yaml[key][choice]}"
+                        f.writelines(f"\n{self.INDENT}" + choice_desc)
                 # newline before the next data directive
                 f.write("\n\n")
 
