@@ -52,6 +52,8 @@ html_static_path = ["_static"]
 # a custom logo for a specific documentation site
 html_logo = os.path.join(os.path.dirname(__file__), "static/MDO_Lab_logo_RTD.png")
 
+# this is required for sphinxcontrib.bibtex
+bibtex_bibfiles = []
 
 def setup(app):
     app.add_css_file("theme_overrides.css")
