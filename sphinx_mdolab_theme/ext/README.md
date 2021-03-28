@@ -35,6 +35,8 @@ The directive automatically includes this temporary file (but excludes it elsewh
 Unlike the Options Table, this directive only accepts one optional argument `filename`.
 Typesetting informs is not possible with this directive.
 
+Besides readability, another benefit of using this directive is that you can directly reference individual options via ``:py:data:`<name>` `` which should get linked properly.
+
 # YAML File Format
 The YAML file containing the descriptions must be of the following format:
 ```
