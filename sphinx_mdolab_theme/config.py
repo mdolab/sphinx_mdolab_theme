@@ -22,6 +22,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "sphinx-prompt",
     "sphinx_mdolab_theme.ext.optionstable",
 ]
 
