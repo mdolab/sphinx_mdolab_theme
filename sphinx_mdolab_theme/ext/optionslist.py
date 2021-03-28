@@ -3,6 +3,8 @@ from docutils.parsers.rst.directives.misc import Include
 import yaml
 import os
 
+# this is here in the file scope rather than class
+# because we can import it in the config.py file for consistency
 TEMP_FILE = "tmp.rst"
 
 
@@ -10,6 +12,8 @@ class OptionsList(Include):
     """
     This is an include directive, but with an extra step of generating a temporary options file
     which gets included.
+    The idea to inherit from Include came from sphinx.directives.other.Include which just wraps
+    super().run()
     """
 
     optional_arguments = 1
@@ -29,9 +33,11 @@ class OptionsList(Include):
         self.get_options_from_yaml()
         # read the descriptions
         self.get_descriptions()
+        # generate the temp file
         self.generate_temp_file()
-        # reset the self.arguments to just the temp file name
+        # reset the self.arguments to just the temp file name for the inherited include directive
         self.arguments = [TEMP_FILE]
+        # actually run the include directive
         return super().run()
 
     def generate_temp_file(self):
@@ -79,6 +85,7 @@ class OptionsList(Include):
                 desc = f"\n{self.INDENT}" + desc
                 txt.append(desc)
                 f.writelines("\n".join(txt))
+                # newline before the next data directive
                 f.write("\n\n")
 
     def get_options_from_yaml(self):
