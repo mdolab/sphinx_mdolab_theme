@@ -23,6 +23,8 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "sphinx-prompt",
+    "sphinxcontrib.bibtex",
+    "sphinxcontrib.autoprogram",
     "sphinx_mdolab_theme.ext.optionstable",
 ]
 
