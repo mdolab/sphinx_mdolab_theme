@@ -1,4 +1,5 @@
 import os
+from .ext.optionslist import TEMP_FILE
 
 # -- Project information -----------------------------------------------------
 copyright = "2021, MDO Lab"
@@ -26,6 +27,7 @@ extensions = [
     "sphinxcontrib.bibtex",
     "sphinxcontrib.autoprogram",
     "sphinx_mdolab_theme.ext.optionstable",
+    "sphinx_mdolab_theme.ext.optionslist",
 ]
 
 # tell autoclass to document the __init__ methods
@@ -54,6 +56,10 @@ html_logo = os.path.join(os.path.dirname(__file__), "static/MDO_Lab_logo_RTD.png
 
 # this is required for sphinxcontrib.bibtex
 bibtex_bibfiles = []
+
+# this is a temporary file used by the optionslist extension
+# we exclude it here
+exclude_patterns = [TEMP_FILE]
 
 
 def setup(app):
