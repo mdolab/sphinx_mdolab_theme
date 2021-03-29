@@ -42,6 +42,7 @@ setup(
         "pyyaml",
         "numpydoc",
         "sphinx-prompt",
+        "sphinx-copybutton",
         "sphinxcontrib-autoprogram",
         "sphinxcontrib-bibtex",
     ],

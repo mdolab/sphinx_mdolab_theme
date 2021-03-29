@@ -26,6 +26,7 @@ extensions = [
     "sphinx-prompt",
     "sphinxcontrib.bibtex",
     "sphinxcontrib.autoprogram",
+    "sphinx_copybutton",
     "sphinx_mdolab_theme.ext.optionstable",
     "sphinx_mdolab_theme.ext.optionslist",
 ]
