@@ -58,9 +58,15 @@ html_logo = os.path.join(os.path.dirname(__file__), "static/MDO_Lab_logo_RTD.png
 # this is required for sphinxcontrib.bibtex
 bibtex_bibfiles = []
 
-# this is a temporary file used by the optionslist extension
-# we exclude it here
-exclude_patterns = [TEMP_FILE]
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This pattern also affects html_static_path and html_extra_path.
+exclude_patterns = [
+    TEMP_FILE,  # this is a temporary file used by the optionslist extension we exclude it here
+    "_build",
+    "Thumbs.db",
+    ".DS_Store",
+]
 
 
 def setup(app):
