@@ -23,6 +23,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "numpydoc",
     "sphinx-prompt",
     "sphinxcontrib.bibtex",
     "sphinxcontrib.autoprogram",
@@ -33,6 +34,8 @@ extensions = [
 
 # tell autoclass to document the __init__ methods
 autoclass_content = "both"
+# disable showing type annotations for now
+autodoc_typehints = "none"
 
 # if using numpydoc, this hides a bunch of warnings
 numpydoc_show_class_members = False
