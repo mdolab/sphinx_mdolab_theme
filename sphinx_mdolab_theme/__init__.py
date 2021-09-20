@@ -2,7 +2,7 @@ from os import path
 import sphinx
 
 
-__version__ = "1.3.5"
+__version__ = "1.3.6"
 __version_full__ = __version__
 
 
