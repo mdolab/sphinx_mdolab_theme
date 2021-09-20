@@ -2,7 +2,7 @@ import os
 from .ext.optionslist import TEMP_FILE
 
 # -- Project information -----------------------------------------------------
-copyright = "2021, MDO Lab"
+copyright = "2021, MDO Lab"  # noqa: A001
 
 # -- General configuration -----------------------------------------------------
 
@@ -65,6 +65,21 @@ exclude_patterns = [
     "Thumbs.db",
     ".DS_Store",
 ]
+
+# Specify baseurls for all public repos
+repos = [
+    "pygeo",
+    "pyoptsparse",
+    "baseclasses",
+    "idwarp",
+    "adflow",
+    "pyhyp",
+    "multipoint",
+    "pyspline",
+    "cgnsutilities",
+    "mach-aero",
+]
+intersphinx_mapping = {r: (f"https://mdolab-{r}.readthedocs-hosted.com/en/latest", None) for r in repos}
 
 
 def setup(app):
