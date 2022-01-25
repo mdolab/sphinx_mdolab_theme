@@ -3,7 +3,7 @@ from .ext.optionslist import TEMP_FILE
 
 # -- Project information -----------------------------------------------------
 copyright = "2021, MDO Lab"  # noqa: A001
-
+author = "MDO Lab"
 # -- General configuration -----------------------------------------------------
 
 # List of patterns, relative to source directory, that match files and
