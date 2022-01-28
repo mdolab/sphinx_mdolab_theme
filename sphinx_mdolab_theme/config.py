@@ -2,7 +2,7 @@ import os
 from .ext.optionslist import TEMP_FILE
 
 # -- Project information -----------------------------------------------------
-copyright = "2021, MDO Lab"  # noqa: A001
+project_copyright = "2022, MDO Lab"  # noqa: A001
 author = "MDO Lab"
 # -- General configuration -----------------------------------------------------
 
