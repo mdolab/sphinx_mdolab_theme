@@ -148,7 +148,12 @@ class OptionsTable(Table):
                 # for choices, we expect a field called desc containing general description
                 # plus one field for each possible choice
                 # TODO: can add better error message when yaml file does not match
-                desc = self.yaml[key]["desc"]
+                try:
+                    desc = self.yaml[key]["desc"]
+                except KeyError as e:
+                    raise KeyError(
+                        f"The description for option '{key}' is missing from the YAML file {self.filename}"
+                    ) from e
                 if choices:
                     for choice in value[1]:
                         desc += f"\n\n-  ``{choice}``: \t{self.yaml[key][choice]}"

@@ -72,7 +72,12 @@ class OptionsList(Include):
                 # for choices, we expect a field called desc containing general description
                 # plus one field for each possible choice
                 # TODO: can add better error message when yaml file does not match
-                desc = self.yaml[key]["desc"]
+                try:
+                    desc = self.yaml[key]["desc"]
+                except KeyError as e:
+                    raise KeyError(
+                        f"The description for option '{key}' is missing from the YAML file {self.filename}"
+                    ) from e
                 # because this part needs to be indented in the RST file, we have to split it first
                 if "\n" in desc:
                     base_desc = desc.splitlines()
