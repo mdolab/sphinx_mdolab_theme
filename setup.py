@@ -32,16 +32,22 @@ setup(
         "sphinx_mdolab_theme": [
             "theme.conf",
             "static/*.css",
+            "static/*.png",
         ]
     },
     include_package_data=True,
     install_requires=[
-        "sphinx",
-        "sphinx_rtd_theme",
+        "sphinx>=3.0",
+        "sphinx_rtd_theme>=0.5",
         "pyyaml",
+        "numpydoc",
+        "sphinx-prompt",
+        "sphinx-copybutton",
+        "sphinxcontrib-autoprogram",
+        "sphinxcontrib-bibtex",
     ],
     classifiers=[
-        "Development Status :: 3 - Alpha",  # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
+        "Development Status :: 5 - Production/Stable",  # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Build Tools",
         "License :: OSI Approved :: MIT License",

@@ -1,6 +1,9 @@
-# -- Project information -----------------------------------------------------
-copyright = "2020, MDO Lab"
+import os
+from .ext.optionslist import TEMP_FILE
 
+# -- Project information -----------------------------------------------------
+project_copyright = "2022, MDO Lab"  # noqa: A001
+author = "MDO Lab"
 # -- General configuration -----------------------------------------------------
 
 # List of patterns, relative to source directory, that match files and
@@ -20,11 +23,19 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "numpydoc",
+    "sphinx-prompt",
+    "sphinxcontrib.bibtex",
+    "sphinxcontrib.autoprogram",
+    "sphinx_copybutton",
     "sphinx_mdolab_theme.ext.optionstable",
+    "sphinx_mdolab_theme.ext.optionslist",
 ]
 
 # tell autoclass to document the __init__ methods
 autoclass_content = "both"
+# disable showing type annotations for now
+autodoc_typehints = "none"
 
 # if using numpydoc, this hides a bunch of warnings
 numpydoc_show_class_members = False
@@ -37,13 +48,39 @@ html_theme_options = {
     #     "titles_only": True, # hide headings from the sidebar, only show separate pages
 }
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+# This is the MDO Lab logo
+# A default version is provided by the package but this parameter can be overwritten to use
+# a custom logo for a specific documentation site
+html_logo = os.path.join(os.path.dirname(__file__), "static/MDO_Lab_logo_RTD.png")
 
-html_context = {
-    "css_files": [
-        "_static/theme_overrides.css",  # override wide tables in RTD theme
-    ],
-}
+# this is required for sphinxcontrib.bibtex
+bibtex_bibfiles = []
+
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This pattern also affects html_static_path and html_extra_path.
+exclude_patterns = [
+    TEMP_FILE,  # this is a temporary file used by the optionslist extension we exclude it here
+    "_build",
+    "Thumbs.db",
+    ".DS_Store",
+]
+
+# Specify baseurls for all public repos
+repos = [
+    "pygeo",
+    "pyoptsparse",
+    "baseclasses",
+    "idwarp",
+    "adflow",
+    "pyhyp",
+    "multipoint",
+    "pyspline",
+    "cgnsutilities",
+    "mach-aero",
+]
+intersphinx_mapping = {r: (f"https://mdolab-{r}.readthedocs-hosted.com/en/latest", None) for r in repos}
+
+
+def setup(app):
+    app.add_css_file("theme_overrides.css")

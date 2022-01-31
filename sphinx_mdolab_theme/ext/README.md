@@ -1,7 +1,8 @@
-# Options Table
+# Custom Sphinx directives
+## Options Table
 This is a custom Sphinx extension for parsing a default options dictionary and generating an RST table.
 
-## Usage
+### Usage
 The extension is included by default in `conf.py` and does not need to be configured there.
 To use, simply write the directive
 ```
@@ -22,7 +23,19 @@ For this extension to work, two things must be in place in the code repo:
 - a YAML file corresponding to the `filename` option above that contains the descriptions of the options
 
 The capitalization of the option names **must match** between the default options dictionary, and the keys of the YAML file.
-For readability, we recomment the options to be capitalized according to camelCase, since this will be the display name via this extension.
+For readability, we recommend the options to be capitalized according to camelCase, since this will be the display name via this extension.
+
+### Informs Table
+There is in fact another optional argument which allows this directive to typeset a dictionary of informs of the format `Dict[str, str]`.
+This will be rendered as a two-column table, using `cls()._getInforms()` as the function to extract the informs dictionary.
+## Options List
+This is an alternative to the table where each entry is typeset using the `py:data` directive.
+We parse the YAML file and the options as normal, but generate a new temporary file and write each option as a `.. data::` directive.
+The directive automatically includes this temporary file (but excludes it elsewhere in Sphinx to avoid duplication).
+Unlike the Options Table, this directive only accepts one optional argument `filename`.
+Typesetting informs is not possible with this directive.
+
+Besides readability, another benefit of using this directive is that you can directly reference individual options via ``:py:data:`<name>` `` which should get linked properly.
 
 # YAML File Format
 The YAML file containing the descriptions must be of the following format:
