@@ -13,6 +13,11 @@
     }
  }
 
+/* change max width to none */
+.wy-nav-content {
+   max-width: 1000px !important;
+}
+
 /* Override the definition list style which is broken */
 /* based on https://github.com/readthedocs/sphinx_rtd_theme/issues/979#issuecomment-662288540 */
 .rst-content dl:not(.docutils) dt:first-child {
