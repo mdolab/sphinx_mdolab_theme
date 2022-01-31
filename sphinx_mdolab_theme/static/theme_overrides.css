@@ -15,7 +15,7 @@
 
 /* change max width to none */
 .wy-nav-content {
-   max-width: 1200px !important;
+   max-width: 1000px !important;
 }
 
 /* Override the definition list style which is broken */
