@@ -76,7 +76,6 @@ repos = [
     "pyhyp",
     "multipoint",
     "pyspline",
-    "cgnsutilities",
     "mach-aero",
 ]
 intersphinx_mapping = {r: (f"https://mdolab-{r}.readthedocs-hosted.com/en/latest", None) for r in repos}
