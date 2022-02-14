@@ -27,6 +27,11 @@ class OptionsList(Include):
     TYPE_PREFIX = "   :type: "
     VALUE_PREFIX = "   :value: "
     INDENT = "   "
+    # class attributes
+    module_path = None
+    member_name = None
+    defaultOptions = None
+    yaml = None
 
     def run(self):
         # set the self.defaultOptions attribute

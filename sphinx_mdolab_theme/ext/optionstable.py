@@ -27,6 +27,16 @@ class OptionsTable(Table):
     # default options
     filename = "options.yaml"
 
+    # class attributes
+    N_COLS = 4
+    header = header = ["Name", "Type", "Default value", "Description"]
+    col_widths = [1, 1, 1, 97]
+    module_path = None
+    member_name = None
+    defaultOptions = None
+    informs = None
+    yaml = None
+
     def set_header(self):
         """
         sets the header and columns based on options
@@ -35,9 +45,7 @@ class OptionsTable(Table):
         if "type" not in self.options:
             self.options["type"] = "options"
         if self.options["type"] == "options":
-            self.N_COLS = 4
-            self.header = ["Name", "Type", "Default value", "Description"]
-            self.col_widths = [1, 1, 1, 97]
+            pass
         elif self.options["type"] == "informs":
             self.N_COLS = 2
             self.header = ["Code", "Description"]
