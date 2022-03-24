@@ -1,66 +1,66 @@
 trigger:
   branches:
     include:
-    - main
+      - main
   tags:
     include:
-    - v*.*.*
+      - v*.*.*
 
 pr:
-- main
+  - main
 
 resources:
   repositories:
-  - repository: azure_template
-    type: github
-    name: mdolab/.github
-    endpoint: mdolab
+    - repository: azure_template
+      type: github
+      name: mdolab/.github
+      endpoint: mdolab
 
 variables:
-- name: TEST_REPO
-  value: pyhyp
+  - name: TEST_REPO
+    value: pyhyp
 
 stages:
-- stage: Test
-  dependsOn: []
-  displayName: Test
-  jobs:
-  - job:
-    pool:
-      vmImage: 'ubuntu-20.04'
-    strategy:
-      matrix:
-        'python37':
-          PYTHON_VERSION: '3.8'
-        'python38':
-          PYTHON_VERSION: '3.9'
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: $(PYTHON_VERSION)
-    - script: pip install .
-      displayName: Install Package
-    - script: |
-        git clone https://github.com/mdolab/${{ variables.TEST_REPO }}.git
-        cd ${{ variables.TEST_REPO }}/doc
-        pip install -r requirements.txt
-        make html
-      displayName: Test Making Docs
+  - stage: Test
+    dependsOn: []
+    displayName: Test
+    jobs:
+      - job:
+        pool:
+          vmImage: "ubuntu-20.04"
+        strategy:
+          matrix:
+            "python37":
+              PYTHON_VERSION: "3.8"
+            "python38":
+              PYTHON_VERSION: "3.9"
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: $(PYTHON_VERSION)
+          - script: pip install .
+            displayName: Install Package
+          - script: |
+              git clone https://github.com/mdolab/${{ variables.TEST_REPO }}.git
+              cd ${{ variables.TEST_REPO }}/doc
+              pip install -r requirements.txt
+              make html
+            displayName: Test Making Docs
 
-- stage: Style
-  dependsOn: []
-  displayName: Style
-  jobs:
-  - template: azure/azure_style.yaml@azure_template
-    parameters:
-      REPO_NAME: sphinx_mdolab_theme
-      IGNORE_STYLE: false
+  - stage: Style
+    dependsOn: []
+    displayName: Style
+    jobs:
+      - template: azure/azure_style.yaml@azure_template
+        parameters:
+          REPO_NAME: sphinx_mdolab_theme
+          IGNORE_STYLE: false
 
-- stage:
-  dependsOn: 
-  - Test
-  - Style
-  displayName: PyPI
-  condition: and(succeeded(), contains(variables['build.sourceBranch'], 'tags'))
-  jobs:
-  - template: azure/azure_pypi.yaml@azure_template
+  - stage:
+    dependsOn:
+      - Test
+      - Style
+    displayName: PyPI
+    condition: and(succeeded(), contains(variables['build.sourceBranch'], 'tags'))
+    jobs:
+      - template: azure/azure_pypi.yaml@azure_template
