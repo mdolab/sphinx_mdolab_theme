@@ -66,6 +66,9 @@ exclude_patterns = [
     ".DS_Store",
 ]
 
+# check all links
+nitpicky = True
+
 # Specify baseurls for all public repos
 repos = [
     "pygeo",
