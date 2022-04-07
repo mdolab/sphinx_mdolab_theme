@@ -111,6 +111,8 @@ class OptionsList(Include):
     def get_descriptions(self):
         if "filename" in self.options:
             self.filename = self.options["filename"]
+        source_file = self.state.document.attributes["source"]
+        self.filename = os.path.join(os.path.dirname(source_file), self.filename)
         if not os.path.isfile(self.filename):
             raise FileNotFoundError(f"The file {self.filename} must exist! Failed module is {self.member_name}.")
 
