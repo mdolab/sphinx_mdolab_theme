@@ -158,13 +158,13 @@ class EmbedCodeDirective(Directive):
                 setup_code = (
                     ""
                     if method_name == "setUp"
-                    else dedent(strip_header(remove_docstrings(inspect.getsource(getattr(class_, "setUp")))))
+                    else dedent(strip_header(remove_docstrings(inspect.getsource(class_.setUp))))
                 )
 
                 teardown_code = (
                     ""
                     if method_name == "tearDown"
-                    else dedent(strip_header(remove_docstrings(inspect.getsource(getattr(class_, "tearDown")))))
+                    else dedent(strip_header(remove_docstrings(inspect.getsource(class_.tearDown))))
                 )
 
                 # for interleaving, we need to mark input/output blocks
