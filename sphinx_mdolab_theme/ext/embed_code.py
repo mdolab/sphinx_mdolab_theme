@@ -13,7 +13,7 @@ import sphinx
 from sphinx.errors import SphinxError
 
 # First party modules
-from sphinx_mdolab_theme.utils.docutil import (
+from ..utils.docutil import (
     consolidate_input_blocks,
     dedent,
     extract_output_blocks,

@@ -26,7 +26,7 @@ from sphinx.writers.html5 import HTML5Translator
 from sphinx.writers.html import HTMLTranslator
 
 # First party modules
-from sphinx_mdolab_theme.utils.general_utils import printoptions
+from .general_utils import printoptions
 
 sqlite_file = "feature_docs_unit_test_db.sqlite"  # name of the sqlite database file
 table_name = "feature_unit_tests"  # name of the table to be queried

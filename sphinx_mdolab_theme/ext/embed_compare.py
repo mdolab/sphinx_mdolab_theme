@@ -6,7 +6,7 @@ from docutils.parsers.rst import Directive
 import sphinx
 
 # First party modules
-from sphinx_mdolab_theme.utils.docutil import get_source_code
+from ..utils.docutil import get_source_code
 
 
 class ContentContainerDirective(Directive):
