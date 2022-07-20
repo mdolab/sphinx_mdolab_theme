@@ -45,6 +45,7 @@ setup(
         "sphinx-copybutton",
         "sphinxcontrib-autoprogram",
         "sphinxcontrib-bibtex",
+        "sphinx-tabs",
         "redbaron",
         "numpy",
     ],
