@@ -22,15 +22,15 @@ class EmbedN2Directive(Directive):
 
     The one required argument is the model file to be diagrammed.
     Optional arguments are numerical width and height of the embedded object, and
-    "toolbar" if the toolbar should be visible by default.
+    "no-toolbar" if the toolbar should be hidden by default.
 
-    Example with width of 1500, height of 800, and toolbar displayed:
+    Example with width of 1500, height of 800, and toolbar hidden:
 
     .. embed-n2:
         ../../examples/model.py
         1500
         800
-        toolbar
+        no-toolbar
 
     """
 
@@ -40,14 +40,14 @@ class EmbedN2Directive(Directive):
 
     def run(self):
         path_to_model = self.arguments[0]
-        n2_dims = [1200, 700]
-        show_toolbar = False
+        n2_dims = [900, 620]
+        show_toolbar = True
 
         if len(self.arguments) > 1 and self.arguments[1]:
             n2_dim_idx = 0
             for idx in range(1, len(self.arguments)):
-                if self.arguments[idx] == "toolbar":
-                    show_toolbar = True
+                if self.arguments[idx] == "no-toolbar":
+                    show_toolbar = False
                 else:
                     n2_dims[n2_dim_idx] = self.arguments[idx]
                     n2_dim_idx = 1
@@ -61,7 +61,7 @@ class EmbedN2Directive(Directive):
         # Generate N2 files into the target_dir. Those files are later copied
         # into the top of the HTML hierarchy, so the HTML doc file needs a
         # relative path to them.
-        target_dir = os.path.join(os.getcwd(), "_n2html")
+        target_dir = os.path.join(os.getcwd(), "_build/html")
 
         rel_dir = os.path.relpath(os.getcwd(), os.path.dirname(self.state.document.settings._source))
         html_base_name = os.path.basename(path_to_model).split(".")[0] + "_n2.html"
@@ -84,7 +84,7 @@ class EmbedN2Directive(Directive):
         object_tag = (
             "<iframe width='" + str(n2_dims[0]) + "'"
             " height='" + str(n2_dims[1]) + "'"
-            " style='border: 1px solid lightgray; resize: both;'"
+            " style='border: 0px solid lightgray; resize: both;'"
             " src='" + html_rel_name + "'></iframe>"
         )
 
