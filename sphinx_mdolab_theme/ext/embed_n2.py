@@ -22,7 +22,7 @@ class EmbedN2Directive(Directive):
 
     The one required argument is the model file to be diagrammed.
     Optional arguments are numerical width and height of the embedded object, and
-    "toolbar" if the toolbar should be visible by default.
+    "no-toolbar" if the toolbar should be hidden by default.
 
     Example with width of 1500, height of 800, and toolbar hidden:
 
