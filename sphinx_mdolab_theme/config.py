@@ -1,8 +1,9 @@
 import os
+from datetime import datetime
 from .ext.optionslist import TEMP_FILE
 
 # -- Project information -----------------------------------------------------
-project_copyright = "2022, MDO Lab"  # noqa: A001
+project_copyright = f"{datetime.now().year}, MDO Lab"  # noqa: A001
 author = "MDO Lab"
 # -- General configuration -----------------------------------------------------
 
