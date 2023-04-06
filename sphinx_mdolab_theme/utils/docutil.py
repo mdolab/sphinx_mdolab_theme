@@ -899,7 +899,7 @@ def get_interleaved_io_nodes(input_blocks, output_blocks):
     nodelist = []
     n = 1
 
-    for code, tagls in input_blocks:
+    for code, tag in input_blocks:
         input_node = nodes.literal_block(code, code)
         input_node["language"] = "python"
         nodelist.append(input_node)
