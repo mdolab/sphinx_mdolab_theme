@@ -12,12 +12,14 @@ def printoptions(*args, **kwds):
     Set print options for the scope of the `with` block, and restore the old
     options at the end. See `numpy.set_printoptions` for the full description of
     available options. If any invalid options are specified, they will be ignored.
+
     Parameters
     ----------
-    *args : list
+    \*args : list
         Variable-length argument list.
-    **kwds : dict
+    \*\*kwds : dict
         Arbitrary keyword arguments.
+
     Examples
     --------
     >>> with printoptions(precision=2):
@@ -26,6 +28,7 @@ def printoptions(*args, **kwds):
     The `as`-clause of the `with`-statement gives the current print options:
     >>> with printoptions(precision=2) as opts:
     ...      assert_equal(opts, np.get_printoptions())
+
     See Also
     --------
     set_printoptions, get_printoptions
