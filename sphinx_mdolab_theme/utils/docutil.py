@@ -306,7 +306,6 @@ def get_source_code(path):
             source = inspect.getsource(module)
 
         except ImportError:
-
             # Second, assume class and see if it works
             try:
                 parts = path.split(".")
@@ -319,7 +318,6 @@ def get_source_code(path):
                 indent = 1
 
             except ImportError:
-
                 # else assume it is a path to a method
                 module_path = ".".join(parts[:-2])
                 module = importlib.import_module(module_path)
@@ -538,7 +536,7 @@ def consolidate_input_blocks(input_blocks, output_blocks):
     new_input_blocks = []
     new_block = ""
 
-    for (code, tag) in input_blocks:
+    for code, tag in input_blocks:
         if tag not in output_blocks:
             # no output, add to new consolidated block
             if new_block and not new_block.endswith("\n"):
@@ -832,7 +830,6 @@ def run_code(code_to_run, path, module=None, cls=None, shows_plot=False, imports
 
             # We need more precision from numpy
             with printoptions(precision=8):
-
                 if module is None:
                     globals_dict = {
                         "__file__": path,
@@ -904,7 +901,7 @@ def get_interleaved_io_nodes(input_blocks, output_blocks):
     nodelist = []
     n = 1
 
-    for (code, tag) in input_blocks:
+    for code, tag in input_blocks:
         input_node = nodes.literal_block(code, code)
         input_node["language"] = "python"
         nodelist.append(input_node)
