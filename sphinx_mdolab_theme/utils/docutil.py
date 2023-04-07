@@ -888,6 +888,8 @@ def get_skip_output_node(output):
 
 def get_interleaved_io_nodes(input_blocks, output_blocks):
     """
+    Get interleaved IO nodes
+
     Parameters
     ----------
     input_blocks : list of tuple
