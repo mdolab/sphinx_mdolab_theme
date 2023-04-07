@@ -189,7 +189,6 @@ class EmbedCodeDirective(Directive):
         skipped = failed = False
 
         if "output" in layout or "interleave" in layout or "plot" in layout:
-
             imports_not_required = "imports-not-required" in self.options
 
             if shows_plot:
