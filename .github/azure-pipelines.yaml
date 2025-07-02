@@ -42,7 +42,6 @@ stages:
               pip install -r requirements.txt
               make html
             displayName: Test Making Docs
-
   - stage: Style
     dependsOn: []
     displayName: Style
@@ -51,7 +50,6 @@ stages:
         parameters:
           REPO_NAME: sphinx_mdolab_theme
           IGNORE_STYLE: false
-
   - stage: PyPI Release
     dependsOn:
     - Test
