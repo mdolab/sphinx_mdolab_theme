@@ -16,6 +16,10 @@ resources:
     name: mdolab/.github
     endpoint: mdolab
 
+variables:
+  - name: TEST_REPO
+    value: pyhyp
+
 stages:
   - stage: Test
     dependsOn: []
