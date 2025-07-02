@@ -25,7 +25,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "numpydoc",
-    "sphinx-prompt",
+    "sphinx_prompt",
     "sphinxcontrib.bibtex",
     "sphinxcontrib.autoprogram",
     "sphinx_copybutton",
