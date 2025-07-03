@@ -1,20 +1,20 @@
 trigger:
   branches:
     include:
-      - main
+    - main
   tags:
     include:
-      - v*.*.*
+    - v*.*.*
 
 pr:
-  - main
+- main
 
 resources:
   repositories:
-    - repository: azure_template
-      type: github
-      name: mdolab/.github
-      endpoint: mdolab
+  - repository: azure_template
+    type: github
+    name: mdolab/.github
+    endpoint: mdolab
 
 variables:
   - name: TEST_REPO
@@ -27,13 +27,13 @@ stages:
     jobs:
       - job:
         pool:
-          vmImage: "ubuntu-20.04"
+          vmImage: "ubuntu-24.04"
         strategy:
           matrix:
-            "python37":
-              PYTHON_VERSION: "3.8"
-            "python38":
+            "python39":
               PYTHON_VERSION: "3.9"
+            "python311":
+              PYTHON_VERSION: "3.11"
         steps:
           - task: UsePythonVersion@0
             inputs:
@@ -46,7 +46,6 @@ stages:
               pip install -r requirements.txt
               make html
             displayName: Test Making Docs
-
   - stage: Style
     dependsOn: []
     displayName: Style
@@ -55,12 +54,12 @@ stages:
         parameters:
           REPO_NAME: sphinx_mdolab_theme
           IGNORE_STYLE: false
-
-  - stage:
+  - stage: PyPI_Release
     dependsOn:
-      - Test
-      - Style
+    - Test
+    - Style
     displayName: PyPI
     condition: and(succeeded(), contains(variables['build.sourceBranch'], 'tags'))
     jobs:
-      - template: azure/azure_pypi.yaml@azure_template
+    - template: azure/azure_pypi.yaml@azure_template
+
