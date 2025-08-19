@@ -1,4 +1,4 @@
-""" Sphinx directive for a side by side code comparison."""
+"""Sphinx directive for a side by side code comparison."""
 
 # External modules
 from docutils import nodes

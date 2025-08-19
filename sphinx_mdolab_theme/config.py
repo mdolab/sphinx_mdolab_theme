@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+
 from .ext.optionslist import TEMP_FILE
 
 # -- Project information -----------------------------------------------------
@@ -84,6 +85,11 @@ repos = [
     "mach-aero",
 ]
 intersphinx_mapping = {r: (f"https://mdolab-{r}.readthedocs-hosted.com/en/latest", None) for r in repos}
+intersphinx_mapping |= {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable/", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy/", None),
+}
 
 
 def setup(app):
